@@ -1,17 +1,15 @@
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from './styles/global';
-import { defaultTheme } from './styles/themes/defaultTheme';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './routes/AppRoutes';
+import { theme } from './styles/theme';
 
 export const App = () => {
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ChakraProvider theme={theme}>
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
-      <GlobalStyle />
-    </ThemeProvider>
+    </ChakraProvider>
   );
 };
