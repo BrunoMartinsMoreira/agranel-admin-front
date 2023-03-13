@@ -22,8 +22,11 @@ export const theme = extendTheme({
     },
     global: {
       body: {
-        bg: 'gray.900',
+        bg: 'gray.700',
         color: 'gray.50'
+      },
+      Button:{
+        textTransform:'uppercase'
       }
     }
   }
