@@ -9,7 +9,6 @@ export function Logo() {
       w='64'
       fontFamily='mono'
       color='green.600'
-      borderRight='4px solid #2F855A'
       px='2'
       py='2'
       textAlign='center'
