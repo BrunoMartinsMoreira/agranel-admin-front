@@ -18,9 +18,9 @@ export const Header = () => {
     >
       <Logo />
 
-      <Flex align='center' mr='12'>
-        <Box mr='' textAlign='right'>
-          <Text>Dita Matos</Text>
+      <Flex align='center' mr='10'>
+        <Box mr='2' textAlign='right'>
+          <Text fontWeight='bold'>Dita Matos</Text>
         </Box>
         <Avatar backgroundColor='gray.700' size='md' name='Dita Matos' />
       </Flex>
