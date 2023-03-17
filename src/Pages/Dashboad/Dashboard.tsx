@@ -87,7 +87,7 @@ export const Dashboard = () => {
 
           <Box p='8' bg='gray.800' borderRadius={8} pb='4'>
             <Text fontSize='lg' mb='4'>
-              Outro Titulo da sessão
+              Evolução das vendas
             </Text>
             <Chart options={options} series={series} type='area' height={160} />
           </Box>
