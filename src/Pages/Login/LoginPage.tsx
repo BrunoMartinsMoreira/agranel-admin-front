@@ -23,7 +23,7 @@ export const LoginPage = () => {
           pb='4'
           borderRadius={8}
         >
-          <Text as='b' color='gray.100' fontSize='36px' pt='4' mb='8'>
+          <Text as='b' color='gray.100' fontSize='3xl' pt='4' mb='8'>
             LOGIN
           </Text>
           <Stack spacing='4'>
@@ -46,7 +46,7 @@ export const LoginPage = () => {
             <Button
               type='submit'
               mt='6'
-              colorScheme='green'
+              colorScheme='pink'
               size='lg'
               /* isLoading={formState.isSubmitting}*/
             >

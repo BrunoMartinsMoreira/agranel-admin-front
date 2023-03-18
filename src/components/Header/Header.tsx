@@ -15,6 +15,7 @@ export const Header = () => {
       px='4'
       py='12'
       position='sticky'
+      bgGradient='linear(to-r, gray.900, gray.700)'
     >
       <Logo />
 
@@ -22,7 +23,7 @@ export const Header = () => {
         <Box mr='2' textAlign='right'>
           <Text fontWeight='bold'>Dita Matos</Text>
         </Box>
-        <Avatar backgroundColor='gray.700' size='md' name='Dita Matos' />
+        <Avatar backgroundColor='gray.900' size='md' name='Dita Matos' />
       </Flex>
     </Flex>
   );

@@ -78,14 +78,24 @@ export const Dashboard = () => {
           minChildWidth='320px'
           alignItems='flex-start'
         >
-          <Box p='8' bg='gray.800' borderRadius={8} pb='4'>
+          <Box
+            p='8'
+            bgGradient='linear(to-r, gray.900, gray.700)'
+            borderRadius={8}
+            pb='4'
+          >
             <Text fontSize='lg' mb='4'>
               Vendas
             </Text>
             <Chart options={options} series={series} type='bar' height={160} />
           </Box>
 
-          <Box p='8' bg='gray.800' borderRadius={8} pb='4'>
+          <Box
+            p='8'
+            bgGradient='linear(to-r, gray.900, gray.700)'
+            borderRadius={8}
+            pb='4'
+          >
             <Text fontSize='lg' mb='4'>
               Evolução das vendas
             </Text>

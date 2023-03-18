@@ -7,9 +7,10 @@ import { RegisterPage } from '../Pages/Register/RegisterPage';
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Dashboard />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
+
+      <Route path='/' element={<Dashboard />} />
       <Route path='/products' element={<ProductsPage />} />
     </Routes>
   );

@@ -14,7 +14,7 @@ export const RegisterPage = () => {
         p='8'
         borderRadius={8}
       >
-        <Text as='b' color='gray.100' fontSize='36px' pt='4' mb='8'>
+        <Text as='b' color='gray.100' fontSize='3xl' pt='4' mb='8'>
           CADASTRAR-SE
         </Text>
         <Stack spacing='4'>
@@ -45,7 +45,7 @@ export const RegisterPage = () => {
           <Button
             type='submit'
             mt='6'
-            colorScheme='green'
+            colorScheme='pink'
             size='lg'
             /* isLoading={formState.isSubmitting}*/
           >
@@ -54,7 +54,7 @@ export const RegisterPage = () => {
         </Stack>
         <Flex p='3' pt='8' width='100%' justify='space-between'>
           <Text size='8'>Já possui Conta?</Text>
-          <Link to='/'>
+          <Link to='/login'>
             <Text
               as='b'
               color='blue.500'
