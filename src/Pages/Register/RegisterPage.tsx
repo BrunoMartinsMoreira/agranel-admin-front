@@ -1,8 +1,28 @@
 import { Flex, Button, Stack, Text } from '@chakra-ui/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Input } from '../../components/Form/Input';
+import { RegisterFormData, registerFormSchema } from './RegisterSchema';
 
 export const RegisterPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerFormSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
+    console.log(data);
+  };
+
   return (
     <Flex
       w='100vw'
@@ -21,41 +41,42 @@ export const RegisterPage = () => {
         pt='4'
         pb={['0', '4']}
         borderRadius={8}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Text as='b' color='gray.100' fontSize='3xl' pt='4' mb='8'>
           CADASTRAR-SE
         </Text>
         <Stack spacing='4'>
           <Input
-            name='name'
+            inputName='name'
             type='text'
             label='Nome'
             placeholder='Nome'
-            /* error={errors.email}
-        {...register('name')}*/
+            error={errors.name}
+            {...register('name')}
           />
           <Input
-            name='email'
+            inputName='email'
             type='email'
             label='E-mail'
             placeholder='E-mail'
-            /* error={errors.email}
-        {...register('email')}*/
+            error={errors.email}
+            {...register('email')}
           />
           <Input
-            name='password'
+            inputName='password'
             type='password'
             label='Senha'
             placeholder='Senha'
-            /* error={errors.password}
-        {...register('password')}*/
+            error={errors.password}
+            {...register('password')}
           />
           <Button
             type='submit'
             mt='6'
             colorScheme='pink'
             size='lg'
-            /* isLoading={formState.isSubmitting}*/
+            isLoading={isSubmitting}
           >
             Salvar
           </Button>

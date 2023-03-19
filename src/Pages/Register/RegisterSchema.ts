@@ -1,0 +1,17 @@
+import * as zod from 'zod'
+
+export const registerFormSchema = zod.object({
+ name: zod
+      .string({required_error: 'Fala seu nome lindo pra mim meu anjo!'})
+      .min(8, {message: 'Fala seu nome lindo pra mim meu anjo!'})
+      .max(32),
+  email: zod
+    .string({required_error: 'Para conseguir se cadastrar você precisa digitar um email válido aí coisa doce!'})
+    .email('Para conseguir se cadastrar você precisa digitar um email válido aí coisa doce!'),
+  password: zod
+      .string({required_error: 'Se não informar a senha fica difícil meu bem!'})
+      .min(8, {message: 'Se não informar a senha fica difícil meu bem!'})
+      .max(32)
+})
+
+export type RegisterFormData = zod.infer<typeof registerFormSchema>
