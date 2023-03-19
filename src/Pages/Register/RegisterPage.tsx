@@ -4,14 +4,22 @@ import { Input } from '../../components/Form/Input';
 
 export const RegisterPage = () => {
   return (
-    <Flex w='100vw' h='100vh' alignItems='center' justifyContent='center'>
+    <Flex
+      w='100vw'
+      h={['80vh', '100vh']}
+      alignItems='center'
+      justifyContent='center'
+    >
       <Flex
         as='form'
         flexDirection='column'
         width='100%'
-        maxWidth={600}
+        h={['93%', 'auto']}
+        maxWidth={380}
         bg='gray.800'
         p='8'
+        pt='4'
+        pb={['0', '4']}
         borderRadius={8}
       >
         <Text as='b' color='gray.100' fontSize='3xl' pt='4' mb='8'>
@@ -52,7 +60,13 @@ export const RegisterPage = () => {
             Salvar
           </Button>
         </Stack>
-        <Flex p='3' pt='8' width='100%' justify='space-between'>
+        <Flex
+          p='3'
+          pt='8'
+          width='100%'
+          mt={['10', '8']}
+          justify='space-between'
+        >
           <Text size='8'>Já possui Conta?</Text>
           <Link to='/login'>
             <Text
