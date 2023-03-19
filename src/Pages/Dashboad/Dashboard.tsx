@@ -39,14 +39,6 @@ const options = {
       '2021-03-20T00:00:00.000Z',
       '2021-03-21T00:00:00.000Z',
       '2021-03-22T00:00:00.000Z',
-      '2021-03-23T00:00:00.000Z',
-      '2021-03-24T00:00:00.000Z',
-      '2021-03-25T00:00:00.000Z',
-      '2021-03-26T00:00:00.000Z',
-      '2021-03-27T00:00:00.000Z',
-      '2021-03-28T00:00:00.000Z',
-      '2021-03-29T00:00:00.000Z',
-      '2021-03-30T00:00:00.000Z',
     ],
   },
   fill: {
@@ -62,7 +54,7 @@ const options = {
 const series = [
   {
     name: 'Produtos mais vendidos',
-    data: [540, 210, 350, 290, 98, 128, 321, 540, 210, 350, 290, 198, 128],
+    data: [540, 210, 350, 290, 98],
   },
 ];
 
@@ -79,7 +71,7 @@ export const Dashboard = () => {
           alignItems='flex-start'
         >
           <Box
-            p='8'
+            p={['4', '8']}
             bgGradient='linear(to-r, gray.900, gray.700)'
             borderRadius={8}
             pb='4'
@@ -91,7 +83,7 @@ export const Dashboard = () => {
           </Box>
 
           <Box
-            p='8'
+            p={['4', '8']}
             bgGradient='linear(to-r, gray.900, gray.700)'
             borderRadius={8}
             pb='4'
