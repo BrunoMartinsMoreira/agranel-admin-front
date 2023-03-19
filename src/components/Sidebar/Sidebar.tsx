@@ -1,10 +1,45 @@
-import { Box, Stack } from '@chakra-ui/react';
-import { CalcSection } from './Calc';
-import { OrdersSection } from './OrdersSection';
-import { ProductsSection } from './ProductsSection';
-import { SalesSection } from './SalesSection';
+import {
+  Box,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  useBreakpointValue,
+} from '@chakra-ui/react';
+import { useSideBarDrawer } from '../../contexts/SidebarDrawerContext';
+import { SideBarNav } from './SideBarNav';
 
 export const Sidebar = () => {
+  const isDrawerSidebar = useBreakpointValue({
+    base: true,
+    lg: false,
+  });
+
+  const { isOpen, onClose } = useSideBarDrawer();
+
+  if (isDrawerSidebar) {
+    return (
+      <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
+        <DrawerOverlay>
+          <DrawerContent bgGradient='linear(to-r, gray.900, gray.700)'>
+            <DrawerCloseButton
+              mt='4'
+              color='gray.300'
+              fontWeight='bold'
+              bg='pink.800'
+            />
+            <DrawerHeader mt='4'>Menu</DrawerHeader>
+            <DrawerBody mt='4'>
+              <SideBarNav />
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+    );
+  }
+
   return (
     <Box
       as='aside'
@@ -14,12 +49,7 @@ export const Sidebar = () => {
       p='6'
       borderRadius='8px'
     >
-      <Stack spacing='12' align='flex-start'>
-        <CalcSection />
-        <SalesSection />
-        <ProductsSection />
-        <OrdersSection />
-      </Stack>
+      <SideBarNav />
     </Box>
   );
 };
