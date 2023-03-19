@@ -1,7 +1,10 @@
 import { Box, Text, Link, Stack, Icon } from '@chakra-ui/react';
 import { RiMenuAddFill, RiListCheck2 } from 'react-icons/ri';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const ProductsSection = () => {
+  const { pathname } = useLocation();
+
   return (
     <Box>
       <Text fontWeight='bold' color='gray.300' fontSize='small'>
@@ -9,12 +12,11 @@ export const ProductsSection = () => {
       </Text>
       <Stack spacing='4' mt='3' ml='2' align='stretch'>
         <Link
+          to='/products/new'
           display='flex'
           alignItems='center'
-          color='blue.400'
-          _active={{
-            color: 'pink.400',
-          }}
+          color={pathname === '/products/new' ? 'pink.400' : 'blue.400'}
+          as={NavLink}
         >
           <Icon as={RiMenuAddFill} fontSize='20' />
           <Text ml='2' fontWeight='medium'>
@@ -23,12 +25,11 @@ export const ProductsSection = () => {
         </Link>
 
         <Link
+          to='/products'
           display='flex'
           alignItems='center'
-          color='blue.400'
-          _active={{
-            color: 'pink.400',
-          }}
+          color={pathname === '/products' ? 'pink.400' : 'blue.400'}
+          as={NavLink}
         >
           <Icon as={RiListCheck2} fontSize='20' />
           <Text ml='2' fontWeight='medium'>
