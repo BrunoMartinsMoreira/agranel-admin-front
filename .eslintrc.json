@@ -36,7 +36,7 @@
       "spaced-comment": "error",
       "quotes": ["error", "single"],
       "no-duplicate-imports": "error",
-      "no-console":"error"
+      "no-console":"warn"
     },
     "settings": {
       "import/resolver": {

@@ -1,8 +1,27 @@
 import { Flex, Button, Stack, Text } from '@chakra-ui/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Input } from '../../components/Form/Input';
+import { LoginFormData, loginFormSchema } from './LoginSchema';
 
 export const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
       <Flex
@@ -23,33 +42,35 @@ export const LoginPage = () => {
           pt='4'
           pb={['0', '4']}
           borderRadius={8}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <Text as='b' color='gray.100' fontSize='3xl' pt='4' mb='8'>
             LOGIN
           </Text>
+
           <Stack spacing='4'>
             <Input
-              name='email'
+              inputName='email'
               type='email'
               label='E-mail'
               placeholder='E-mail'
-              /* error={errors.email}
-              {...register('email')}*/
+              error={errors.email}
+              {...register('email')}
             />
             <Input
-              name='password'
+              inputName='password'
               type='password'
               label='Senha'
               placeholder='Senha'
-              /* error={errors.password}
-              {...register('password')}*/
+              error={errors.password}
+              {...register('password')}
             />
             <Button
               type='submit'
               mt='6'
               colorScheme='pink'
               size='lg'
-              /* isLoading={formState.isSubmitting}*/
+              isLoading={isSubmitting}
             >
               Entrar
             </Button>

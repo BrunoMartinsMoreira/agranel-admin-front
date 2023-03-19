@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 interface InputProps extends ChakraInputProps {
-  name: string;
+  inputName?: string;
   label?: string;
   type?: string;
   placeHolder?: string;
@@ -17,15 +17,15 @@ interface InputProps extends ChakraInputProps {
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { label, name, error = null, ...rest },
+  { label, inputName, error = null, ...rest },
   ref,
 ) => {
   return (
     <FormControl isInvalid={!!error}>
-      {!label || <FormLabel htmlFor={name}>{label}</FormLabel>}
+      {!label || <FormLabel htmlFor={inputName}>{label}</FormLabel>}
       <ChakraInput
-        name={name}
-        id={name}
+        name={inputName}
+        id={inputName}
         focusBorderColor='pink.700'
         size='lg'
         _hover={{
