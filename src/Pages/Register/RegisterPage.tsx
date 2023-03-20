@@ -9,6 +9,7 @@ export const RegisterPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerFormSchema),
@@ -21,12 +22,13 @@ export const RegisterPage = () => {
 
   const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
     console.log(data);
+    reset();
   };
 
   return (
     <Flex
       w='100vw'
-      h={['80vh', '100vh']}
+      h={['84vh', '100vh']}
       alignItems='center'
       justifyContent='center'
     >
@@ -39,7 +41,7 @@ export const RegisterPage = () => {
         bg='gray.800'
         p='8'
         pt='4'
-        pb={['0', '4']}
+        pb={['2', '4']}
         borderRadius={8}
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -71,6 +73,14 @@ export const RegisterPage = () => {
             error={errors.password}
             {...register('password')}
           />
+          <Input
+            inputName='confirmpassword'
+            type='password'
+            label='Repita a senha'
+            placeholder='Repita a senha'
+            error={errors.confirmpassword}
+            {...register('confirmpassword')}
+          />
           <Button
             type='submit'
             mt='6'
@@ -81,13 +91,7 @@ export const RegisterPage = () => {
             Salvar
           </Button>
         </Stack>
-        <Flex
-          p='3'
-          pt='8'
-          width='100%'
-          mt={['10', '8']}
-          justify='space-between'
-        >
+        <Flex p='3' pt='8' width='100%' mt={['0', '8']} justify='space-between'>
           <Text size='8'>Já possui Conta?</Text>
           <Link to='/login'>
             <Text

@@ -9,15 +9,19 @@ import {
 } from '@chakra-ui/react';
 import { RiMenuLine } from 'react-icons/ri';
 import { useSideBarDrawer } from '../../contexts/SidebarDrawerContext';
+import { useAuth } from '../../hooks/useAuth';
 import { Logo } from './Logo';
 
 export const Header = () => {
   const { onOpen } = useSideBarDrawer();
+  const { getUser } = useAuth();
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  const user = getUser();
 
   return (
     <Flex
@@ -47,10 +51,10 @@ export const Header = () => {
       <Flex align='center' mr={['0', '10']} ml='auto'>
         {isWideVersion && (
           <Box mr='2' textAlign='right'>
-            <Text fontWeight='bold'>Dita Matos</Text>
+            <Text fontWeight='bold'>{user?.name}</Text>
           </Box>
         )}
-        <Avatar backgroundColor='gray.900' size='md' name='Dita Matos' />
+        <Avatar backgroundColor='gray.900' size='md' name={`${user?.name}`} />
       </Flex>
     </Flex>
   );

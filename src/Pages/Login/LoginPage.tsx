@@ -1,14 +1,17 @@
-import { Flex, Button, Stack, Text } from '@chakra-ui/react';
+import { Flex, Button, Stack, Text, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '../../components/Form/Input';
+import { AuthContext } from '../../contexts/AuthContext';
 import { LoginFormData, loginFormSchema } from './LoginSchema';
 
 export const LoginPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
@@ -18,8 +21,38 @@ export const LoginPage = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+  const { signIn } = useContext(AuthContext);
+  const toast = useToast();
+
+  const onSubmit: SubmitHandler<LoginFormData> = async ({
+    email,
+    password,
+  }) => {
+    try {
+      await signIn({ email, password });
+
+      toast({
+        position: 'top',
+        title: 'Autenticado com sucesso!',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      });
+
+      navigate('/');
+
+      reset();
+    } catch (error: any) {
+      const { message } = error.response.data;
+      toast({
+        position: 'top',
+        title: message,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
