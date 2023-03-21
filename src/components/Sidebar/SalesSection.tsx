@@ -12,10 +12,10 @@ export const SalesSection = () => {
       </Text>
       <Stack spacing='4' mt='3' ml='2' align='stretch'>
         <Link
-          to='/sales/new'
+          to='/admin/sales/new'
           display='flex'
           alignItems='center'
-          color={pathname === '/sales/new' ? 'pink.400' : 'blue.400'}
+          color={pathname === '/admin/sales/new' ? 'pink.400' : 'blue.400'}
           as={NavLink}
         >
           <Icon as={RiCurrencyLine} fontSize='20' />
@@ -27,10 +27,10 @@ export const SalesSection = () => {
 
       <Stack spacing='4' mt='3' ml='2' align='stretch'>
         <Link
-          to='/sales/reports'
+          to='/admin/sales/reports'
           display='flex'
           alignItems='center'
-          color={pathname === '/sales/new' ? 'pink.400' : 'blue.400'}
+          color={pathname === '/admin/sales/new' ? 'pink.400' : 'blue.400'}
           as={NavLink}
         >
           <Icon as={RiBarChartGroupedLine} fontSize='20' />

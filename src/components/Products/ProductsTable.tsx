@@ -10,8 +10,15 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { RiPencilFill } from 'react-icons/ri';
+import { IProduct } from '../../types/Products';
 
-export const ProductsTable = () => {
+type PropTypes = {
+  products: IProduct[];
+};
+
+export const ProductsTable = ({ products }: PropTypes) => {
+  const numberToString = (item: number) => item.toFixed(2).replace('.', ',');
+
   return (
     <Box overflow='auto' maxWidth='90vw'>
       <Table colorScheme='whiteAlpha'>
@@ -39,48 +46,29 @@ export const ProductsTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td px='2'>Castanha do pará</Td>
-            <Td px='2'>Oleaginosas</Td>
-            <Td px='2'>R$98,50</Td>
-            <Td px='2'>R$116,00</Td>
-            <Td px='2'>18%</Td>
-            <Td px='2'> 2kg</Td>
-            <Td px='2'>
-              <Button
-                as='a'
-                size='sm'
-                fontSize='sm'
-                colorScheme='purple'
-                cursor='pointer'
-                textTransform='uppercase'
-                leftIcon={<Icon as={RiPencilFill} />}
-              >
-                editar
-              </Button>
-            </Td>
-          </Tr>
-          <Tr>
-            <Td px='2'>Castanha de Caju</Td>
-            <Td px='2'>Oleaginosas</Td>
-            <Td px='2'>R$98,50</Td>
-            <Td px='2'>R$116,00</Td>
-            <Td px='2'>18%</Td>
-            <Td px='2'>900g</Td>
-            <Td px='2'>
-              <Button
-                as='a'
-                size='sm'
-                fontSize='sm'
-                colorScheme='purple'
-                cursor='pointer'
-                textTransform='uppercase'
-                leftIcon={<Icon as={RiPencilFill} />}
-              >
-                editar
-              </Button>
-            </Td>
-          </Tr>
+          {products?.map((product) => (
+            <Tr key={product.id}>
+              <Td px='2'>{product.name} </Td>
+              <Td px='2'> {product.category} </Td>
+              <Td px='2'>R${numberToString(product.costPrice)}</Td>
+              <Td px='2'>R${numberToString(product.salePrice)}</Td>
+              <Td px='2'>{numberToString(product.profitMargin)}%</Td>
+              <Td px='2'> {numberToString(product.stockQuantity)} kg</Td>
+              <Td px='2'>
+                <Button
+                  as='a'
+                  size='sm'
+                  fontSize='sm'
+                  colorScheme='purple'
+                  cursor='pointer'
+                  textTransform='uppercase'
+                  leftIcon={<Icon as={RiPencilFill} />}
+                >
+                  editar
+                </Button>
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </Box>

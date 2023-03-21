@@ -12,10 +12,10 @@ export const CalcSection = () => {
       </Text>
       <Stack spacing='4' mt='3' ml='2' align='stretch'>
         <Link
-          to='/calc/by-price'
+          to='/admin/calc/by-price'
           display='flex'
           alignItems='center'
-          color={pathname === '/calc/by-price' ? 'pink.400' : 'blue.400'}
+          color={pathname === '/admin/calc/by-price' ? 'pink.400' : 'blue.400'}
           as={NavLink}
         >
           <Icon as={RiMoneyDollarBoxLine} fontSize='20' />
@@ -25,10 +25,10 @@ export const CalcSection = () => {
         </Link>
 
         <Link
-          to='/cal/by-weight'
+          to='/admin/cal/by-weight'
           display='flex'
           alignItems='center'
-          color={pathname === '/calc/by-weight' ? 'pink.400' : 'blue.400'}
+          color={pathname === '/admin/calc/by-weight' ? 'pink.400' : 'blue.400'}
           as={NavLink}
         >
           <Icon as={RiPercentFill} fontSize='20' />

@@ -34,18 +34,18 @@ export const Header = () => {
       align='center'
       px={['2', '4']}
       py={['8', '12']}
+      bgGradient='linear(to-r, gray.800, gray.700)'
+      boxShadow='0px 0px 8px 3px rgba(0, 0, 0, 0.95)'
       position='sticky'
-      bgGradient='linear(to-r, gray.900, gray.700)'
+      top='0'
     >
-      {!isWideVersion && (
-        <IconButton
-          icon={<Icon as={RiMenuLine} />}
-          aria-label='open navigation'
-          fontSize='24'
-          variant='unstyled'
-          onClick={onOpen}
-        ></IconButton>
-      )}
+      <IconButton
+        icon={<Icon as={RiMenuLine} />}
+        aria-label='open navigation'
+        fontSize='24'
+        variant='unstyled'
+        onClick={onOpen}
+      ></IconButton>
       <Logo />
 
       <Flex align='center' mr={['0', '10']} ml='auto'>

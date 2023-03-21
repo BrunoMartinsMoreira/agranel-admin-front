@@ -1,8 +1,9 @@
 export interface IProduct {
   id: string,
   name: string,
-  costPrice:string,
-  salePrice: string,
-  margin: string,
-  stockQuantity: string,
+  category: string;
+  costPrice: number,
+  salePrice: number,
+  profitMargin: number,
+  stockQuantity: number,
 }

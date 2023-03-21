@@ -1,29 +1,62 @@
-import { Box, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 
 export const Dashboard = () => {
   return (
-    <SimpleGrid flex='1' gap='4' minChildWidth='320px' alignItems='flex-start'>
-      <Box
-        p={['4', '8']}
-        bgGradient='linear(to-r, gray.900, gray.700)'
-        borderRadius={8}
-        pb='4'
+    <Flex width='100%' direction='column' gap='8'>
+      <SimpleGrid
+        flex='1'
+        gap='4'
+        minChildWidth={['320px', '350px']}
+        alignItems='flex-start'
       >
-        <Text fontSize='lg' mb='4'>
-          Vendas do mês
-        </Text>
-      </Box>
+        <Box
+          bgGradient='linear(to-r, gray.800, gray.700)'
+          boxShadow='0px 0px 8px 2px rgba(0, 0, 0, 0.9)'
+          borderRadius={8}
+          p={['4', '8']}
+          pb='4'
+        >
+          <Text fontSize='lg' mb='4'>
+            Vendas do mês
+          </Text>
 
-      <Box
-        p={['4', '8']}
-        bgGradient='linear(to-r, gray.900, gray.700)'
-        borderRadius={8}
-        pb='4'
-      >
-        <Text fontSize='lg' mb='4'>
-          Produtos mais vendidos
-        </Text>
-      </Box>
-    </SimpleGrid>
+          <Text fontSize='3xl' mb='1' fontWeight='bold' color='blue.400'>
+            R$ 3500,00
+          </Text>
+        </Box>
+
+        <Box
+          p={['4', '8']}
+          bgGradient='linear(to-r, gray.800, gray.700)'
+          boxShadow='0px 0px 8px 2px rgba(0, 0, 0, 0.9)'
+          borderRadius={8}
+          pb='4'
+        >
+          <Text fontSize='lg' mb='4'>
+            Saidas
+          </Text>
+
+          <Text fontSize='3xl' mb='1' fontWeight='bold' color='red.400'>
+            R$ 2000,00
+          </Text>
+        </Box>
+
+        <Box
+          p={['4', '8']}
+          bgGradient='linear(to-r, gray.800, gray.700)'
+          boxShadow='0px 0px 8px 2px rgba(0, 0, 0, 0.9)'
+          borderRadius={8}
+          pb='4'
+        >
+          <Text fontSize='lg' mb='4'>
+            Lucro do mês
+          </Text>
+
+          <Text fontSize='3xl' mb='1' fontWeight='bold' color='green.400'>
+            R$ 1500,00
+          </Text>
+        </Box>
+      </SimpleGrid>
+    </Flex>
   );
 };

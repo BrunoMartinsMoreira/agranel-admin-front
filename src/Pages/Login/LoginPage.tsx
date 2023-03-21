@@ -40,7 +40,7 @@ export const LoginPage = () => {
         isClosable: true,
       });
 
-      navigate('/');
+      navigate('/admin/dashboard');
 
       reset();
     } catch (error: any) {

@@ -9,15 +9,15 @@ import { PrivateRoute } from './PrivateRoute';
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/login' element={<LoginPage />} />
+      <Route path='/' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route
         path='/*'
         element={<h1>Ainda estou desenvolvendo essa merda, calma ai</h1>}
       />
-      <Route path='/' element={<AuthenticatedLayout />}>
+      <Route path='/admin' element={<AuthenticatedLayout />}>
         <Route
-          path='/'
+          path='/admin/dashboard'
           element={
             <PrivateRoute>
               <Dashboard />
@@ -25,7 +25,7 @@ export const AppRoutes = () => {
           }
         />
         <Route
-          path='/products'
+          path='/admin/products'
           element={
             <PrivateRoute>
               <ProductsPage />
