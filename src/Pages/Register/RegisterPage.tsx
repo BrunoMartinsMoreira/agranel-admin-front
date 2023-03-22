@@ -1,9 +1,10 @@
-import { Flex, Button, Stack, Text } from '@chakra-ui/react';
+import { Flex, Button, Stack, Text, useToast } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '../../components/Form/Input';
-import { RegisterFormData, registerFormSchema } from './RegisterSchema';
+import { useUsersApi } from '../../hooks/useUserApi';
+import { ICreateUser, registerFormSchema } from './RegisterSchema';
 
 export const RegisterPage = () => {
   const {
@@ -11,7 +12,7 @@ export const RegisterPage = () => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<RegisterFormData>({
+  } = useForm<ICreateUser>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
       name: '',
@@ -20,9 +21,34 @@ export const RegisterPage = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
-    console.log(data);
-    reset();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const { createUser } = useUsersApi();
+
+  const onSubmit: SubmitHandler<ICreateUser> = async (data) => {
+    try {
+      const response = await createUser(data);
+
+      toast({
+        position: 'top',
+        title: response.message,
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      });
+
+      reset();
+      navigate('/');
+    } catch (error: any) {
+      const { message } = error.response.data;
+      toast({
+        position: 'top',
+        title: message,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+      });
+    }
   };
 
   return (

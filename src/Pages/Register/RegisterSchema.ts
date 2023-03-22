@@ -20,4 +20,4 @@ export const registerFormSchema = zod.object({
   message: 'As senhas não conferem',
 });
 
-export type RegisterFormData = zod.infer<typeof registerFormSchema>
+export type ICreateUser = zod.infer<typeof registerFormSchema>

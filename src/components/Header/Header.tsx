@@ -37,6 +37,7 @@ export const Header = () => {
       bgGradient='linear(to-r, gray.800, gray.700)'
       boxShadow='0px 0px 8px 3px rgba(0, 0, 0, 0.95)'
       position='sticky'
+      zIndex='999'
       top='0'
     >
       <IconButton

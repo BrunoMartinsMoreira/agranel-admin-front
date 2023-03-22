@@ -75,7 +75,8 @@ export const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bgGradient:['linear(to-r, green.900, green.800, green.700)'],
+       // bgGradient:['linear(to-r, green.900, green.700, green.500)'],
+        background: 'gray.700',
         overflow:'auto',
         color: 'gray.50',
         '::-webkit-scrollbar': {

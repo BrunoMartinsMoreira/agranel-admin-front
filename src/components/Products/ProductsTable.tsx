@@ -18,6 +18,7 @@ type PropTypes = {
 
 export const ProductsTable = ({ products }: PropTypes) => {
   const numberToString = (item: number) => item.toFixed(2).replace('.', ',');
+  const formatString = (item: string) => item.replace('_', ' ');
 
   return (
     <Box overflow='auto' maxWidth='90vw'>
@@ -49,7 +50,7 @@ export const ProductsTable = ({ products }: PropTypes) => {
           {products?.map((product) => (
             <Tr key={product.id}>
               <Td px='2'>{product.name} </Td>
-              <Td px='2'> {product.category} </Td>
+              <Td px='2'> {formatString(product.category)} </Td>
               <Td px='2'>R${numberToString(product.costPrice)}</Td>
               <Td px='2'>R${numberToString(product.salePrice)}</Td>
               <Td px='2'>{numberToString(product.profitMargin)}%</Td>
