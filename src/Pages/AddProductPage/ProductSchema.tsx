@@ -7,10 +7,10 @@ export const productSchema = zod.object({
   category: zod
     .string({ required_error: 'Informe a categoria do produto' })
     .min(1, { message: 'Informe a categoria do produto' }),
-  costPrice: zod.number({ required_error: 'Informe o preço de custo' }).min(1),
-  salePrice: zod.number({ required_error: 'Informe o preço de venda' }).min(1),
+  costPrice: zod.string({ required_error: 'Informe o preço de custo' }).min(1),
+  salePrice: zod.string({ required_error: 'Informe o preço de venda' }).min(1),
   stockQuantity: zod
-    .number({
+    .string({
       required_error: 'Informe a quantidade em estoque',
     })
     .min(1),

@@ -1,14 +1,5 @@
-import {
-  Flex,
-  Text,
-  GridItem,
-  Button,
-  Grid,
-  NumberInput,
-  NumberInputField,
-  FormControl,
-  FormLabel,
-} from '@chakra-ui/react';
+/* eslint-disable react/no-children-prop */
+import { Flex, Text, GridItem, Button, Grid } from '@chakra-ui/react';
 import { Input } from '../../components/Form/Input';
 import { SelectCategory } from '../../components/Form/SelectCategory';
 import { ICreateProduct, productSchema } from './ProductSchema';
@@ -27,17 +18,16 @@ export const AddProductPage = () => {
     defaultValues: {
       name: '',
       category: '',
-      costPrice: 0,
-      salePrice: 0,
-      stockQuantity: 0,
+      costPrice: '',
+      salePrice: '',
+      stockQuantity: '',
     },
   });
 
-  const onSubmit: SubmitHandler<ICreateProduct> = async (data) => {
+  const onSubmit: SubmitHandler<ICreateProduct> = (data) => {
     console.log(data);
+    // reset();
   };
-
-  const format = (value: number) => `R$${value}`;
 
   return (
     <Flex
@@ -70,6 +60,7 @@ export const AddProductPage = () => {
           <GridItem colSpan={[1, 2]} rowSpan={1}>
             <Input
               inputName='name'
+              size='md'
               type='text'
               label='Nome do produto'
               placeholder='Nome do produto'
@@ -82,33 +73,26 @@ export const AddProductPage = () => {
           </GridItem>
           <GridItem colSpan={1} rowSpan={1}>
             <CustomNumberInput
-              inputName='costPrice'
               label='Preço de custo'
-              placeholder='Preço de custo'
+              prefix='R$'
               error={errors.costPrice}
-              {...register('costPrice')}
+              // {...register('costPrice')}
             />
           </GridItem>
           <GridItem colSpan={1} rowSpan={1}>
-            <Input
-              inputName='salePrice'
-              step={0.1}
-              type='number'
+            <CustomNumberInput
               label='Preço de venda'
-              placeholder='Preço de venda'
-              error={errors.salePrice}
-              {...register('salePrice')}
+              prefix='R$'
+              error={errors.costPrice}
+              // {...register('salePrice')}
             />
           </GridItem>
           <GridItem colSpan={1} rowSpan={1}>
-            <Input
-              inputName='stockQuantity'
-              type='number'
-              step={0.1}
+            <CustomNumberInput
               label='Estoque(kg)'
-              placeholder='Estoque(kg)'
+              prefix='KG'
               error={errors.stockQuantity}
-              {...register('stockQuantity')}
+              // {...register('stockQuantity')}
             />
           </GridItem>
         </Grid>
