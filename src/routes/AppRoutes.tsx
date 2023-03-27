@@ -11,12 +11,12 @@ import { PrivateRoute } from './PrivateRoute';
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<LoginPage />} />
+      <Route path='/login' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
       <Route path='/*' element={<NotFoundPage />} />
-      <Route path='/admin' element={<AuthenticatedLayout />}>
+      <Route path='/' element={<AuthenticatedLayout />}>
         <Route
-          path='/admin/dashboard'
+          path='/'
           element={
             <PrivateRoute>
               <Dashboard />
@@ -24,7 +24,7 @@ export const AppRoutes = () => {
           }
         />
         <Route
-          path='/admin/products'
+          path='/products'
           element={
             <PrivateRoute>
               <ProductsPage />
@@ -32,7 +32,7 @@ export const AppRoutes = () => {
           }
         />
         <Route
-          path='/admin/products/new'
+          path='/products/new'
           element={
             <PrivateRoute>
               <AddProductPage />

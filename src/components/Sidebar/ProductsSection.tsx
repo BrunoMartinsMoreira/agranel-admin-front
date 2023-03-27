@@ -12,10 +12,10 @@ export const ProductsSection = () => {
       </Text>
       <Stack spacing='4' mt='3' ml='2' align='stretch'>
         <Link
-          to='/admin/products/new'
+          to='/products/new'
           display='flex'
           alignItems='center'
-          color={pathname === '/admin/products/new' ? 'pink.400' : 'blue.400'}
+          color={pathname === '/products/new' ? 'pink.400' : 'blue.400'}
           as={NavLink}
         >
           <Icon as={RiMenuAddFill} fontSize='20' />
@@ -25,10 +25,10 @@ export const ProductsSection = () => {
         </Link>
 
         <Link
-          to='/admin/products'
+          to='/products'
           display='flex'
           alignItems='center'
-          color={pathname === '/admin/products' ? 'pink.400' : 'blue.400'}
+          color={pathname === '/products' ? 'pink.400' : 'blue.400'}
           as={NavLink}
         >
           <Icon as={RiListCheck2} fontSize='20' />

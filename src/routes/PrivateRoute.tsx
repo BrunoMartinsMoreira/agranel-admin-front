@@ -9,7 +9,7 @@ export const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const { getUser } = useAuth();
   const user = getUser();
 
-  if (!user?.access_token) return <Navigate to='/' />;
+  if (!user?.access_token) return <Navigate to='/login' />;
 
   return children;
 };

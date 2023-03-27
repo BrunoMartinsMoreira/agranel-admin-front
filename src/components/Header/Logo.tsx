@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export function Logo() {
   return (
     <Link
-      to='/admin/dashboard'
+      to='/'
       _hover={{
         borderBottom: 'none',
       }}

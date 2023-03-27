@@ -119,7 +119,7 @@ export const RegisterPage = () => {
         </Stack>
         <Flex p='3' pt='8' width='100%' mt={['0', '8']} justify='space-between'>
           <Text size='8'>Já possui Conta?</Text>
-          <Link to='/'>
+          <Link to='/login'>
             <Text
               as='b'
               color='blue.500'
