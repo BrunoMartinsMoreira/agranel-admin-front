@@ -8,7 +8,7 @@ import {
   InputLeftAddon,
   InputProps as ChakraInputProps,
 } from '@chakra-ui/react';
-import { ChangeEvent, forwardRef, ForwardRefRenderFunction } from 'react';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 import { FieldError } from 'react-hook-form';
 
 interface CustomNumberInputProps extends ChakraInputProps {
@@ -19,22 +19,12 @@ interface CustomNumberInputProps extends ChakraInputProps {
   prefix: string;
 }
 
-const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-  const value = target.value;
-  const parsedValue = value
-    .replace(/[^0-9,]/g, '')
-    .replace(',', '.')
-    .replace(/(\..*)\./g, '$1');
-
-  return Number.parseFloat(parsedValue);
-};
-
 const InputBase: ForwardRefRenderFunction<
   HTMLInputElement,
   CustomNumberInputProps
 > = ({ label, inputName, error = null, prefix, ...rest }, ref) => {
   return (
-    <FormControl>
+    <FormControl isInvalid={!!error}>
       {!label || <FormLabel htmlFor={inputName}>{label}</FormLabel>}
       <InputGroup>
         <InputLeftAddon bg='gray.800' children={prefix} />
@@ -44,7 +34,6 @@ const InputBase: ForwardRefRenderFunction<
           step='0.01'
           name={inputName}
           id={inputName}
-          onChange={onChange}
           focusBorderColor='pink.700'
           _hover={{
             bgColor: 'gray.900',

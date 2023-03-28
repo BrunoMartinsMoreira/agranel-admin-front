@@ -17,7 +17,7 @@ const SelectCategoryBase: ForwardRefRenderFunction<
   SelectCustomProps
 > = ({ error, ...rest }, ref) => {
   return (
-    <FormControl colorScheme='gray'>
+    <FormControl colorScheme='gray' isInvalid={!!error}>
       <FormLabel>Tipo de produto</FormLabel>
       <Select
         placeholder=''
