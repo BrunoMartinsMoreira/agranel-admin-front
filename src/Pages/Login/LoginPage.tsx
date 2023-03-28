@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '../../components/Form/Input';
+import { Loading } from '../../components/Loading/Loading';
 import { AuthContext } from '../../contexts/AuthContext';
 import { LoginFormData, loginFormSchema } from './LoginSchema';
 
@@ -64,6 +65,7 @@ export const LoginPage = () => {
         justifyContent='center'
         flexDirection='column'
       >
+        {isSubmitting ? <Loading isOpen={isSubmitting} /> : null}
         <Flex
           as='form'
           flexDirection='column'

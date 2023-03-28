@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { CustomNumberInput } from '../../components/Form/CustomNumberInput';
 import { useProductsApi } from '../../hooks/useProductsApi';
+import { Loading } from '../../components/Loading/Loading';
 
 const calculateProfiMargin = (salePrice: number, costPrice: number) => {
   const profitMargin = ((salePrice - costPrice) / salePrice) * 100;
@@ -21,7 +22,7 @@ export const AddProductPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, defaultValues },
   } = useForm<ICreateProduct>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -76,6 +77,7 @@ export const AddProductPage = () => {
       align='center'
       justify='center'
     >
+      {isSubmitting ? <Loading isOpen={isSubmitting} /> : null}
       <Flex
         as='form'
         flexDirection='column'
@@ -88,7 +90,7 @@ export const AddProductPage = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Text as='b' color='gray.100' fontSize={['xl', '3xl']} pt='4' mb='8'>
-          Adicionar novo produto
+          Cadastrar novo produto
         </Text>
         <Grid
           templateRows={['repeat(5, 1fr)', 'repeat(2, 1fr)']}
@@ -101,6 +103,7 @@ export const AddProductPage = () => {
               inputName='name'
               size='md'
               type='text'
+              value={defaultValues?.name}
               label='Nome do produto'
               placeholder='Nome do produto'
               error={errors.name}
@@ -114,6 +117,7 @@ export const AddProductPage = () => {
             <CustomNumberInput
               label='Preço de custo'
               prefix='R$'
+              value={defaultValues?.costPrice}
               error={errors.costPrice}
               {...register('costPrice')}
             />
@@ -122,6 +126,7 @@ export const AddProductPage = () => {
             <CustomNumberInput
               label='Preço de venda'
               prefix='R$'
+              value={defaultValues?.salePrice}
               error={errors.salePrice}
               {...register('salePrice')}
             />
@@ -130,6 +135,7 @@ export const AddProductPage = () => {
             <CustomNumberInput
               label='Estoque(kg)'
               prefix='KG'
+              value={defaultValues?.stockQuantity}
               error={errors.stockQuantity}
               {...register('stockQuantity')}
             />

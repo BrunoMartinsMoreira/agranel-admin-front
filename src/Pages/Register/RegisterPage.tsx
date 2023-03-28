@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '../../components/Form/Input';
+import { Loading } from '../../components/Loading/Loading';
 import { useUsersApi } from '../../hooks/useUserApi';
 import { ICreateUser, registerFormSchema } from './RegisterSchema';
 
@@ -58,6 +59,7 @@ export const RegisterPage = () => {
       alignItems='center'
       justifyContent='center'
     >
+      {isSubmitting ? <Loading isOpen={isSubmitting} /> : null}
       <Flex
         as='form'
         flexDirection='column'
