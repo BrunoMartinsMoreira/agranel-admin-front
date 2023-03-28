@@ -1,13 +1,22 @@
 /* eslint-disable react/no-children-prop */
-import { Flex, Text, GridItem, Button, Grid } from '@chakra-ui/react';
+import { Flex, Text, GridItem, Button, Grid, useToast } from '@chakra-ui/react';
 import { Input } from '../../components/Form/Input';
 import { SelectCategory } from '../../components/Form/SelectCategory';
 import { ICreateProduct, productSchema } from './ProductSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { CustomNumberInput } from '../../components/Form/CustomNumberInput';
+import { useProductsApi } from '../../hooks/useProductsApi';
+
+const calculateProfiMargin = (salePrice: number, costPrice: number) => {
+  const profitMargin = ((salePrice - costPrice) / salePrice) * 100;
+  return parseFloat(profitMargin.toFixed(2));
+};
 
 export const AddProductPage = () => {
+  const { createProduct } = useProductsApi();
+  const toast = useToast();
+
   const {
     register,
     handleSubmit,
@@ -18,15 +27,45 @@ export const AddProductPage = () => {
     defaultValues: {
       name: '',
       category: '',
-      costPrice: '',
-      salePrice: '',
-      stockQuantity: '',
+      costPrice: undefined,
+      salePrice: undefined,
+      stockQuantity: undefined,
     },
   });
 
-  const onSubmit: SubmitHandler<ICreateProduct> = (data) => {
-    console.log(data);
-    // reset();
+  const onSubmit: SubmitHandler<ICreateProduct> = async ({
+    category,
+    name,
+    costPrice,
+    salePrice,
+    stockQuantity,
+  }) => {
+    try {
+      const profitMargin = calculateProfiMargin(salePrice, costPrice);
+
+      const response = await createProduct(
+        { category, name, costPrice, salePrice, stockQuantity },
+        profitMargin,
+      );
+
+      toast({
+        position: 'top',
+        title: response.message,
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      });
+
+      reset();
+    } catch (error: any) {
+      toast({
+        position: 'top',
+        title: 'Esse produto já está cadastrado linda ❤!',
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -76,15 +115,15 @@ export const AddProductPage = () => {
               label='Preço de custo'
               prefix='R$'
               error={errors.costPrice}
-              // {...register('costPrice')}
+              {...register('costPrice')}
             />
           </GridItem>
           <GridItem colSpan={1} rowSpan={1}>
             <CustomNumberInput
               label='Preço de venda'
               prefix='R$'
-              error={errors.costPrice}
-              // {...register('salePrice')}
+              error={errors.salePrice}
+              {...register('salePrice')}
             />
           </GridItem>
           <GridItem colSpan={1} rowSpan={1}>
@@ -92,7 +131,7 @@ export const AddProductPage = () => {
               label='Estoque(kg)'
               prefix='KG'
               error={errors.stockQuantity}
-              // {...register('stockQuantity')}
+              {...register('stockQuantity')}
             />
           </GridItem>
         </Grid>
