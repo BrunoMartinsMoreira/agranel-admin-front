@@ -1,35 +1,28 @@
-import { Box, useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { Box, Flex, useToast } from '@chakra-ui/react';
 import { ProductsHeader } from '../../components/Products/ProductsHeader';
 import { ProductsTable } from '../../components/Products/ProductsTable';
 import { useProductsApi } from '../../hooks/useProductsApi';
-import { IProduct } from '../../types/Products';
+import { useQuery } from '@tanstack/react-query';
+import { Loading } from '../../components/Loading/Loading';
+import { Pagination } from '../../components/Pagination/Pagination';
 
 export const ProductsPage = () => {
   const { getProducts } = useProductsApi();
   const toast = useToast();
 
-  const [products, setProducts] = useState<IProduct[]>([]);
-
-  const getAll = async () => {
-    try {
-      const { data } = await getProducts();
-      setProducts(data.rows);
-    } catch (error: any) {
-      const { message } = error.response.data;
-      toast({
-        position: 'top',
-        title: message,
-        status: 'error',
-        duration: 4000,
-        isClosable: true,
-      });
-    }
+  const getProductsList = async () => {
+    const response = await getProducts();
+    return {
+      rows: response.data.rows,
+      count: response.data.count,
+    };
   };
 
-  useEffect(() => {
-    getAll();
-  }, []);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['products-list'],
+    queryFn: getProductsList,
+    retry: 3,
+  });
 
   return (
     <Box
@@ -42,7 +35,26 @@ export const ProductsPage = () => {
     >
       <ProductsHeader />
 
-      <ProductsTable products={products} />
+      {isLoading ? <Loading isOpen={isLoading} /> : null}
+      {error ? (
+        <Flex justify='center'>
+          {toast({
+            position: 'top',
+            title: 'Deu ruim amor, calma aí que eu resolvo!',
+            status: 'error',
+            duration: 4000,
+            isClosable: true,
+          })}
+        </Flex>
+      ) : null}
+
+      {data ? <ProductsTable products={data?.rows} /> : null}
+      {data?.count ? (
+        <Pagination
+          total={data?.count}
+          itemDescription='produtos encontrados'
+        />
+      ) : null}
     </Box>
   );
 };
