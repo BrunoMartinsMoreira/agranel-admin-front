@@ -18,10 +18,11 @@ export const ProductsPage = () => {
     };
   };
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, isFetching, error } = useQuery({
     queryKey: ['products-list'],
     queryFn: getProductsList,
     retry: 3,
+    staleTime: 3 * 1000 * 60,
   });
 
   return (
@@ -35,7 +36,10 @@ export const ProductsPage = () => {
     >
       <ProductsHeader />
 
-      {isLoading ? <Loading isOpen={isLoading} /> : null}
+      {isLoading || isFetching ? (
+        <Loading isOpen={isLoading || isFetching} />
+      ) : null}
+
       {error ? (
         <Flex justify='center'>
           {toast({
