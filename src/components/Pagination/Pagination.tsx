@@ -1,11 +1,51 @@
-import { Box, Button, Stack, Text } from '@chakra-ui/react';
+import { Box, Stack, Text } from '@chakra-ui/react';
+import { useMemo } from 'react';
+import { PaginationItem } from './PaginationItem';
 
 interface PaginationProps {
   total: number;
+  itemsPerPage?: number;
+  currentPage?: number;
+  onPageChange: (page: number) => void;
   itemDescription: string;
 }
 
-export const Pagination = ({ total, itemDescription }: PaginationProps) => {
+const generatePagesArray = (from: number, to: number) => {
+  return [...new Array(to - from)]
+    .map((item, index) => from + index + 1)
+    .filter((page) => page > 0);
+};
+
+export const Pagination = ({
+  total,
+  itemsPerPage = 10,
+  currentPage = 1,
+  onPageChange,
+  itemDescription,
+}: PaginationProps) => {
+  const totalPages = Math.ceil(total / itemsPerPage);
+
+  const lastPage = useMemo(
+    () => Math.ceil(total / itemsPerPage),
+    [total, itemsPerPage],
+  );
+
+  const previousPages = useMemo(
+    () =>
+      currentPage > 1
+        ? generatePagesArray(currentPage - 2, currentPage - 1)
+        : [],
+    [currentPage],
+  );
+
+  const nextPages = useMemo(
+    () =>
+      currentPage < lastPage
+        ? generatePagesArray(currentPage, Math.min(currentPage + 1, lastPage))
+        : [],
+    [currentPage],
+  );
+
   return (
     <Stack
       direction='row'
@@ -19,43 +59,55 @@ export const Pagination = ({ total, itemDescription }: PaginationProps) => {
           {total} {itemDescription}
         </Text>
       </Box>
-      <Stack direction='row' spacing='2'>
-        <Button
-          size='sm'
-          fontSize='xs'
-          width='4'
-          colorScheme='pink'
-          disabled
-          _disabled={{
-            bg: 'pink.500',
-            cursor: 'default',
-          }}
-        >
-          1
-        </Button>
-        <Button
-          size='sm'
-          fontSize='xs'
-          width='4'
-          bg='gray.700'
-          _hover={{
-            bg: 'purple.700',
-          }}
-        >
-          2
-        </Button>
-        <Button
-          size='sm'
-          fontSize='xs'
-          width='4'
-          bg='gray.700'
-          _hover={{
-            bg: 'purple.700',
-          }}
-        >
-          3
-        </Button>
-      </Stack>
+      {totalPages > 1 && (
+        <Stack direction='row' spacing='2'>
+          {currentPage > 2 && (
+            <>
+              <PaginationItem onPageChange={onPageChange} number={1} />
+              {currentPage > 3 && (
+                <Text color='gray.300' width='8' textAlign='center'>
+                  ...
+                </Text>
+              )}
+            </>
+          )}
+
+          {previousPages.length > 0 &&
+            previousPages.map((page) => (
+              <PaginationItem
+                onPageChange={onPageChange}
+                number={page}
+                key={page}
+              />
+            ))}
+
+          <PaginationItem
+            onPageChange={onPageChange}
+            number={currentPage}
+            isCurrent
+          />
+
+          {nextPages.length > 0 &&
+            nextPages.map((page) => (
+              <PaginationItem
+                onPageChange={onPageChange}
+                number={page}
+                key={page}
+              />
+            ))}
+
+          {currentPage + 1 < lastPage && (
+            <>
+              {currentPage + 2 < lastPage && (
+                <Text color='gray.300' width='8' textAlign='center'>
+                  ...
+                </Text>
+              )}
+              <PaginationItem onPageChange={onPageChange} number={lastPage} />
+            </>
+          )}
+        </Stack>
+      )}
     </Stack>
   );
 };
