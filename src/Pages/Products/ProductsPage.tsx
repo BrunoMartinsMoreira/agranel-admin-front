@@ -1,4 +1,4 @@
-import { Box, Flex, useToast } from '@chakra-ui/react';
+import { Box, useToast } from '@chakra-ui/react';
 import { ProductsHeader } from '../../components/Products/ProductsHeader';
 import { ProductsTable } from '../../components/Products/ProductsTable';
 import { useProductsApi } from '../../hooks/useProductsApi';
@@ -25,6 +25,15 @@ export const ProductsPage = () => {
     staleTime: 3 * 1000 * 60,
   });
 
+  if (error)
+    toast({
+      position: 'top',
+      title: 'Deu ruim amor, calma aí que eu resolvo!',
+      status: 'error',
+      duration: 4000,
+      isClosable: true,
+    });
+
   return (
     <Box
       flex='1'
@@ -38,18 +47,6 @@ export const ProductsPage = () => {
 
       {isLoading || isFetching ? (
         <Loading isOpen={isLoading || isFetching} />
-      ) : null}
-
-      {error ? (
-        <Flex justify='center'>
-          {toast({
-            position: 'top',
-            title: 'Deu ruim amor, calma aí que eu resolvo!',
-            status: 'error',
-            duration: 4000,
-            isClosable: true,
-          })}
-        </Flex>
       ) : null}
 
       {data ? <ProductsTable products={data?.rows} /> : null}
