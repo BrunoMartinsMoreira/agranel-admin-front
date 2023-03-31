@@ -10,7 +10,7 @@ import { useProductsApi } from '../../hooks/useProductsApi';
 import { Loading } from '../../components/Loading/Loading';
 
 const calculateProfiMargin = (salePrice: number, costPrice: number) => {
-  const profitMargin = ((salePrice - costPrice) / salePrice) * 100;
+  const profitMargin = ((salePrice - costPrice) / costPrice) * 100;
   return parseFloat(profitMargin.toFixed(2));
 };
 
@@ -22,7 +22,7 @@ export const AddProductPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, defaultValues },
+    formState: { errors, isSubmitting },
   } = useForm<ICreateProduct>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -77,7 +77,7 @@ export const AddProductPage = () => {
       align='center'
       justify='center'
     >
-      {isSubmitting ? <Loading isOpen={isSubmitting} /> : null}
+      {isSubmitting && <Loading isOpen={isSubmitting} />}
       <Flex
         as='form'
         flexDirection='column'
@@ -103,7 +103,6 @@ export const AddProductPage = () => {
               inputName='name'
               size='md'
               type='text'
-              value={defaultValues?.name}
               label='Nome do produto'
               placeholder='Nome do produto'
               error={errors.name}
@@ -117,7 +116,6 @@ export const AddProductPage = () => {
             <CustomNumberInput
               label='Preço de custo'
               prefix='R$'
-              value={defaultValues?.costPrice}
               error={errors.costPrice}
               {...register('costPrice')}
             />
@@ -126,7 +124,6 @@ export const AddProductPage = () => {
             <CustomNumberInput
               label='Preço de venda'
               prefix='R$'
-              value={defaultValues?.salePrice}
               error={errors.salePrice}
               {...register('salePrice')}
             />
@@ -135,7 +132,6 @@ export const AddProductPage = () => {
             <CustomNumberInput
               label='Estoque(kg)'
               prefix='KG'
-              value={defaultValues?.stockQuantity}
               error={errors.stockQuantity}
               {...register('stockQuantity')}
             />
