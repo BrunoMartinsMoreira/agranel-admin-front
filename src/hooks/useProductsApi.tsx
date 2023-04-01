@@ -1,13 +1,23 @@
 import { api } from '../api/baseApi';
+import { ITEMS_PER_PAGE } from '../constants/ItemsPerPage';
 import { ICreateProduct } from '../Pages/AddProductPage/ProductSchema';
 import { IApiResponse } from '../types/ApiResponse';
 import { Pagination } from '../types/Pagination';
-import { IProduct } from '../types/Products';
+import { IFindAllProducts, IProduct } from '../types/Products';
 
 export const useProductsApi = () => {
-  const getProducts = async (): Promise<IApiResponse<Pagination<IProduct>>> => {
-    const response = await api.get('/products');
-    return response.data;
+  const getProducts = async (
+    params?: IFindAllProducts,
+  ): Promise<IApiResponse<Pagination<IProduct>>> => {
+    const { data } = await api.get('/products', {
+      params: {
+        page: params?.currentPage,
+        take: params?.take ?? ITEMS_PER_PAGE,
+        category: params?.category,
+      },
+    });
+
+    return data;
   };
 
   const createProduct = async (
@@ -22,6 +32,7 @@ export const useProductsApi = () => {
       profitMargin,
       stockQuantity,
     });
+
     return response.data;
   };
 
