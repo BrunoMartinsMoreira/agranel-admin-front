@@ -1,5 +1,6 @@
 import { Box, Stack, Text } from '@chakra-ui/react';
 import { useMemo } from 'react';
+import { ITEMS_PER_PAGE } from '../../constants/ItemsPerPage';
 import { PaginationItem } from './PaginationItem';
 
 interface PaginationProps {
@@ -18,7 +19,7 @@ const generatePagesArray = (from: number, to: number) => {
 
 export const Pagination = ({
   total,
-  itemsPerPage = 10,
+  itemsPerPage = ITEMS_PER_PAGE,
   currentPage = 1,
   onPageChange,
   itemDescription,
@@ -63,7 +64,7 @@ export const Pagination = ({
         <Stack direction='row' spacing='2'>
           {currentPage > 2 && (
             <>
-              <PaginationItem onPageChange={onPageChange} number={1} />
+              <PaginationItem onPageChange={onPageChange} page={1} />
               {currentPage > 3 && (
                 <Text color='gray.300' width='8' textAlign='center'>
                   ...
@@ -76,14 +77,14 @@ export const Pagination = ({
             previousPages.map((page) => (
               <PaginationItem
                 onPageChange={onPageChange}
-                number={page}
+                page={page}
                 key={page}
               />
             ))}
 
           <PaginationItem
             onPageChange={onPageChange}
-            number={currentPage}
+            page={currentPage}
             isCurrent
           />
 
@@ -91,7 +92,7 @@ export const Pagination = ({
             nextPages.map((page) => (
               <PaginationItem
                 onPageChange={onPageChange}
-                number={page}
+                page={page}
                 key={page}
               />
             ))}
@@ -103,7 +104,7 @@ export const Pagination = ({
                   ...
                 </Text>
               )}
-              <PaginationItem onPageChange={onPageChange} number={lastPage} />
+              <PaginationItem onPageChange={onPageChange} page={lastPage} />
             </>
           )}
         </Stack>
