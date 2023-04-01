@@ -80,11 +80,10 @@ export const theme = extendTheme({
         overflow:'auto',
         color: 'gray.50',
         '::-webkit-scrollbar': {
-          width: '5px',
-          zIndex: 0
+          width: '2px',
         },
         '::-webkit-scrollbar-track': {
-          width: '6px',
+          width: '1px',
           background: 'gray.700',
           backgroundClip: 'content-box',
         },
