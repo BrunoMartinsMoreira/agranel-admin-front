@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const ProductsHeader = () => {
   const navigate = useNavigate();
+
   return (
     <Flex mb='8' justify='space-between' align='center'>
       <Heading size={['md', 'lg']} fontWeight='normal'>
