@@ -10,7 +10,7 @@ import { ProductsTabs } from '../../components/Products/ProductsTabs';
 import { useNavigate } from 'react-router-dom';
 import { IProduct } from '../../types/Products';
 
-export const ProductsPage = () => {
+export const ListProductsPage = () => {
   const { getProducts } = useProductsApi();
   const toast = useToast();
   const navigate = useNavigate();

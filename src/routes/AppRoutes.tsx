@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import { AddProductPage } from '../Pages/AddProductPage/AddProductPage';
+import { AddProductPage } from '../Pages/Products/AddProductPage';
 import { Dashboard } from '../Pages/Dashboad/Dashboard';
-import { EditProductPage } from '../Pages/EditProductPage/EditProductPage';
+import { EditProductPage } from '../Pages/Products/EditProductPage';
 import { LoginPage } from '../Pages/Login/LoginPage';
 import { NotFoundPage } from '../Pages/NotFoundPage/NotFoundPage';
-import { ProductsPage } from '../Pages/Products/ProductsPage';
+import { ListProductsPage } from '../Pages/Products/ListProductsPage';
 import { RegisterPage } from '../Pages/Register/RegisterPage';
 import { AuthenticatedLayout } from './Layouts/AuthenticatedLayout';
 import { PrivateRoute } from './PrivateRoute';
@@ -28,7 +28,7 @@ export const AppRoutes = () => {
           path='/products'
           element={
             <PrivateRoute>
-              <ProductsPage />
+              <ListProductsPage />
             </PrivateRoute>
           }
         />

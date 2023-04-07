@@ -1,6 +1,6 @@
 import { api } from '../api/baseApi';
 import { ITEMS_PER_PAGE } from '../constants/ItemsPerPage';
-import { ICreateProduct } from '../Pages/AddProductPage/ProductSchema';
+import { ICreateOrEditProduct } from '../Pages/Products/schemas/productSchema';
 import { IApiResponse } from '../types/ApiResponse';
 import { Pagination } from '../types/Pagination';
 import { IFindAllProducts, IProduct } from '../types/Products';
@@ -21,7 +21,13 @@ export const useProductsApi = () => {
   };
 
   const createProduct = async (
-    { category, name, costPrice, salePrice, stockQuantity }: ICreateProduct,
+    {
+      category,
+      name,
+      costPrice,
+      salePrice,
+      stockQuantity,
+    }: ICreateOrEditProduct,
     profitMargin: number,
   ): Promise<IApiResponse<IProduct>> => {
     const response = await api.post('/products', {
@@ -37,7 +43,7 @@ export const useProductsApi = () => {
   };
 
   const editProduct = async (
-    data: ICreateProduct,
+    data: ICreateOrEditProduct,
     profitMargin: number,
     productId: string,
   ): Promise<IApiResponse<IProduct>> => {
