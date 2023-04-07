@@ -1,47 +1,56 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "jest": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
-    ],
-    "overrides": [
-      {
-        "files":["*.ts", "*.tsx", "*.d.ts"]
-      }
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": ["./tsconfig.json"]
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "react-hooks",
-        "prettier"
-    ],
-    "rules": {
-      "react/react-in-jsx-scope": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "spaced-comment": "error",
-      "quotes": ["error", "single"],
-      "no-duplicate-imports": "error",
-      "no-console":"warn"
-    },
-    "settings": {
-      "import/resolver": {
-        "typescript": {}
-      }
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.d.ts"
+      ]
     }
-
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks",
+    "prettier"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "spaced-comment": "error",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "no-duplicate-imports": "error",
+    "no-console": "warn",
+    "@typescript-eslint/no-non-null-assertion": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
 }

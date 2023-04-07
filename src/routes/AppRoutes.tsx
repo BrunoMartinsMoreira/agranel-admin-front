@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { AddProductPage } from '../Pages/AddProductPage/AddProductPage';
 import { Dashboard } from '../Pages/Dashboad/Dashboard';
+import { EditProductPage } from '../Pages/EditProductPage/EditProductPage';
 import { LoginPage } from '../Pages/Login/LoginPage';
 import { NotFoundPage } from '../Pages/NotFoundPage/NotFoundPage';
 import { ProductsPage } from '../Pages/Products/ProductsPage';
@@ -36,6 +37,14 @@ export const AppRoutes = () => {
           element={
             <PrivateRoute>
               <AddProductPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/product/edit'
+          element={
+            <PrivateRoute>
+              <EditProductPage />
             </PrivateRoute>
           }
         />

@@ -7,10 +7,13 @@ import { Loading } from '../../components/Loading/Loading';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { useState } from 'react';
 import { ProductsTabs } from '../../components/Products/ProductsTabs';
+import { useNavigate } from 'react-router-dom';
+import { IProduct } from '../../types/Products';
 
 export const ProductsPage = () => {
   const { getProducts } = useProductsApi();
   const toast = useToast();
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [category, setCategory] = useState('temperos');
@@ -30,7 +33,8 @@ export const ProductsPage = () => {
       isClosable: true,
     });
 
-  const handleChangeCategory = (value: string) => setCategory(value);
+  const handleEdit = (product: IProduct) =>
+    navigate('/product/edit', { state: product });
 
   return (
     <Box
@@ -42,13 +46,15 @@ export const ProductsPage = () => {
       mb='5'
     >
       <ProductsHeader />
-      <ProductsTabs onClick={handleChangeCategory} />
+      <ProductsTabs onClick={setCategory} />
 
       {isLoading || isFetching ? (
         <Loading isOpen={isLoading || isFetching} />
       ) : null}
 
-      {data ? <ProductsTable products={data?.data?.rows} /> : null}
+      {data ? (
+        <ProductsTable products={data?.data?.rows} handleEdit={handleEdit} />
+      ) : null}
       {data?.data?.count ? (
         <Pagination
           total={data?.data?.count}
