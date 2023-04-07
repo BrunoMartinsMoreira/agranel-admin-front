@@ -27,10 +27,27 @@ export const useProductsApi = () => {
     const response = await api.post('/products', {
       name,
       category,
-      costPrice,
-      salePrice,
+      costPrice: +costPrice,
+      salePrice: +salePrice,
       profitMargin,
-      stockQuantity,
+      stockQuantity: +stockQuantity,
+    });
+
+    return response.data;
+  };
+
+  const editProduct = async (
+    data: ICreateProduct,
+    profitMargin: number,
+    productId: string,
+  ): Promise<IApiResponse<IProduct>> => {
+    const response = await api.patch(`/products/${productId}`, {
+      name: data.name,
+      category: data.category,
+      costPrice: +data.costPrice,
+      salePrice: +data.salePrice,
+      profitMargin,
+      stockQuantity: +data.stockQuantity,
     });
 
     return response.data;
@@ -39,5 +56,6 @@ export const useProductsApi = () => {
   return {
     getProducts,
     createProduct,
+    editProduct,
   };
 };
