@@ -87,7 +87,7 @@ export const EditProductPage = () => {
     <CreateOrEditProduct
       isSubmitting={isSubmitting}
       onSubmit={handleSubmit(onSubmit)}
-      headerTitle='Cadastrar produto'
+      headerTitle='Editar produto'
       btnText='SALVAR'
     >
       <GridItem colSpan={[1, 2]} rowSpan={1}>
