@@ -14,9 +14,10 @@ import { IProduct } from '../../types/Products';
 
 type PropTypes = {
   products: IProduct[];
+  handleEdit(product: IProduct): void;
 };
 
-export const ProductsTable = ({ products }: PropTypes) => {
+export const ProductsTable = ({ products, handleEdit }: PropTypes) => {
   const numberToString = (item: number) => item.toFixed(2).replace('.', ',');
 
   return (
@@ -60,6 +61,7 @@ export const ProductsTable = ({ products }: PropTypes) => {
                   colorScheme='purple'
                   cursor='pointer'
                   textTransform='uppercase'
+                  onClick={() => handleEdit(product)}
                   leftIcon={<Icon as={RiPencilFill} />}
                 >
                   editar
