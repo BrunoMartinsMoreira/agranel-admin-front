@@ -2,13 +2,17 @@ import { Flex, Heading, Button, Icon } from '@chakra-ui/react';
 import { RiMenuFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 
-export const AddProductsHeader = () => {
+type PropTypes = {
+  title: string;
+};
+
+export const AddOrEditProductsHeader = ({ title }: PropTypes) => {
   const navigate = useNavigate();
 
   return (
     <Flex mb='8' py={['2', '5']} justify='space-between' align='center'>
       <Heading size={['sm', 'md']} fontWeight='normal'>
-        Cadastrar produto
+        {title}
       </Heading>
       <Button
         as='a'
